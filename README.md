@@ -3,12 +3,4 @@ and UniProt IDs to run BLAST, multiple sequence alignment, and MEME Suite FIMO t
 candidate motifs are then used to generate PyMOL scripts to visualize each motif for putative interaction with the scorpion
 toxin LqhIII. 
 
-To run this code, first clone the repository into your desired directory using the git clone https://github.com/annalundeen/
-CompBioProject command in the terminal. Then navigate into the project directory using cd CompBioProject/. This code also
-requires a virtual environment. Documentation on how to set up a virtual environment in VS Code can be found here: 
-https://code.visualstudio.com/docs/python/environments. Once the virtual environment is set up in your project folder,
-make sure that it is activated using the source .venv/bin/activate command. When it is activated, it should look something
-like this: (.venv) user/path_to_file. Then, you will need to install the packages necessary to run the code within the 
-virtual environment. This can be done in one line using the command .venv/bin/python -m pip install numpy pandas requests 
-biopython pymemesuite. Once these packages are installed, you can run the code using the command .venv/bin/python 
-combined_motif_analysis.py. 
+To run this code, first clone the repository into your desired directory using the git clone https://github.com/annalundeen/CompBioProject command in the terminal. Then navigate into the project directory using cd CompBioProject/. This code alsorequires a virtual environment. Documentation on how to set up a virtual environment in VS Code can be found here: https://code.visualstudio.com/docs/python/environments. Once the virtual environment is set up in your project folder,make sure that it is activated using the source .venv/bin/activate command. When it is activated, it should look somethinglike this: (.venv) user/path_to_file. Then, you will need to install the packages necessary to run the code within the virtual environment. This can be done in one line using the command .venv/bin/python -m pip install numpy pandas requests biopython pymemesuite. Once these packages are installed, you can run the code using the command .venv/bin/python combined_motif_analysis.py. 
