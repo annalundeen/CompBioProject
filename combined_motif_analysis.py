@@ -431,6 +431,16 @@ def identify_best_matches(df):
 import numpy as np
 best_matches_df = identify_best_matches(combined_df)
 
+#filtering to exclude motifs with less than 4 AAs
+best_matches_df["Sequences"] = (
+    best_matches_df["Sequences"]
+    .str.split("; ")
+    .apply(lambda x: [i for i in x if len(i) >= 4])
+    .apply(lambda x: "; ".join(x) if x else None)
+)
+#drop rows where there are no motifs greater than 4 AAs
+best_matches_df = best_matches_df.dropna(subset=["Sequences"])
+
 print(f"\nFound {len(best_matches_df)} unique protein-motif combinations")
 print("\nTOP 10 BEST OVERALL MATCHES:")
 print("="*80)
