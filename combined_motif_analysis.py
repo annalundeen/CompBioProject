@@ -431,15 +431,59 @@ def identify_best_matches(df):
 import numpy as np
 best_matches_df = identify_best_matches(combined_df)
 
-#filtering to exclude motifs with less than 4 AAs
-best_matches_df["Sequences"] = (
+######################################
+# FILTER FINAL BEST MATCHES DATAFRAME
+######################################
+
+#map motif numbers to actual sequences
+motif_mapping = {}
+
+for i, motif in enumerate(motifs):
+    motif_mapping[f"motif_{i+1}"] = motif
+
+for i, motif in enumerate(motifs_set):
+    motif_mapping[f"motif_{i+8}"] = motif
+
+best_matches_df["Motif_Sequence"] = best_matches_df["Motif"].map(motif_mapping)
+
+#split sequences into lists
+best_matches_df["Sequences_List"] = (
     best_matches_df["Sequences"]
     .str.split("; ")
-    .apply(lambda x: [i for i in x if len(i) >= 4])
-    .apply(lambda x: "; ".join(x) if x else None)
 )
-#drop rows where there are no motifs greater than 4 AAs
-best_matches_df = best_matches_df.dropna(subset=["Sequences"])
+
+#remove short sequences (<4 AAs)
+best_matches_df["Sequences_List"] = best_matches_df["Sequences_List"].apply(
+    lambda x: [seq for seq in x if len(seq) >= 4] if isinstance(x, list) else []
+)
+
+#remove duplicate sequences
+best_matches_df["Sequences_List"] = best_matches_df["Sequences_List"].apply(
+    lambda x: list(set(x))
+)
+
+#remove rows with no valid sequences
+best_matches_df = best_matches_df[
+    best_matches_df["Sequences_List"].apply(len) > 0
+]
+
+#rebuild sequences column
+best_matches_df["Sequences"] = best_matches_df["Sequences_List"].apply(
+    lambda x: "; ".join(x)
+)
+
+#keep only top 5 strongest matches per protein? optional?
+best_matches_df = (
+    best_matches_df
+    .sort_values("Composite_Score", ascending=False)
+    .groupby("Protein")
+    .head(5) #keep top 5 per protein
+)
+
+#clean up columns
+best_matches_df = best_matches_df.drop(columns=["Sequences_List"])
+
+#######################################################
 
 print(f"\nFound {len(best_matches_df)} unique protein-motif combinations")
 print("\nTOP 10 BEST OVERALL MATCHES:")
