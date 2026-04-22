@@ -1,3 +1,4 @@
+
 ##################
 # IMPORT PACKAGES
 ##################
@@ -17,12 +18,21 @@ from pymemesuite.fimo import FIMO
 ##################
 # GET PROTEINS
 ##################
-proteins = {
-    "Nav1.5": "P15389",
-    "ABLIM1": "O14639",
-    "MYBPC": "Q14896",
-    "MYL2": "P10916"
-}
+with open("sample_data.txt", "r") as f:
+    content = f.read()
+
+parts = content.split("\n\n")
+
+prots_and_ids = parts[0].splitlines()
+motifs = parts[1].splitlines()
+
+del prots_and_ids[0]
+del motifs[0]
+
+proteins={}
+for i in range(len(prots_and_ids)):
+    protein, id = prots_and_ids[i].split(', ')
+    proteins[protein]=id
 
 def fetch_fasta(uniprot_id):
     url = f"https://rest.uniprot.org/uniprotkb/{uniprot_id}.fasta"
@@ -34,9 +44,6 @@ for name, uid in proteins.items():
     fasta = fetch_fasta(uid)
     record = SeqIO.read(StringIO(fasta), "fasta")
     sequences[name] = str(record.seq)
-
-#define motifs
-motifs = ["GLALSDLIQKYFF", "LSDLIQ", "LSSLIQ", "GTVLSDIIQKYFF", "LSDIIQ", "FKVGHGLAC", "VNILAKI"]
 
 ###################
 # BLAST
@@ -209,7 +216,7 @@ def make_prob_matrix(motif, filtered_dict):
     # initialize with the motif itself
     for i, aa in enumerate(motif):
         if aa in count_matrix.columns: 
-            count_matrix.loc[i, aa] += 1
+            count_matrix.loc[i, aa] += 5
 
     # update matrix based on substitutions in aligned hits
     for fragment, hit in filtered_dict.items():
@@ -271,7 +278,7 @@ meme_results = []
 with open("meme_suite_output.txt", "w") as out:
     with MotifFile("motifs_strict_input.meme") as motif_file:
         for motif in motif_file:
-            out.write(f"{motif.name.decode()} {motif.consensus} \n")
+            out.write(f"{motif.name.decode()} {motif.consensus} strict\n")
             header = "Accession\tstart\tstop\tstrand\tscore\tpvalue\tmatch_seq\n"
             out.write(header)
             pattern = fimo.score_motif(motif, sequences_meme, motif_file.background)
@@ -285,7 +292,7 @@ with open("meme_suite_output.txt", "w") as out:
                 meme_results.append({
                     "Method": "MEME",
                     "Protein": match_name,
-                    "Motif": motif.name.decode(),
+                    "Motif": motif.consensus,
                     "Start": m.start,
                     "End": m.stop,
                     "Score": m.score,
@@ -297,7 +304,7 @@ with open("meme_suite_output.txt", "w") as out:
 
     with MotifFile("motifs_flexible_input.meme") as motif_file2:
         for motif in motif_file2:
-            out.write(f"{motif.name.decode()} {motif.consensus} \n")
+            out.write(f"{motif.name.decode()} {motif.consensus} flexible\n")
             header = "Accession\tstart\tstop\tstrand\tscore\tpvalue\tmatch_seq\n"
             out.write(header)
             pattern = fimo.score_motif(motif, sequences_meme, motif_file2.background)
@@ -311,7 +318,7 @@ with open("meme_suite_output.txt", "w") as out:
                 meme_results.append({
                     "Method": "MEME",
                     "Protein": match_name,
-                    "Motif": motif.name.decode(),
+                    "Motif": motif.consensus,
                     "Start": m.start,
                     "End": m.stop,
                     "Score": m.score,
