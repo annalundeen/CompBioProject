@@ -1,0 +1,12 @@
+name: motif_pipeline
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.10
+  - biopython
+  - pandas
+  - numpy
+  - requests
+  - blast
+  - meme

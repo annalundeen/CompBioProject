@@ -1,0 +1,93 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job         count
+--------  -------
+all             1
+blast           1
+combine         1
+fetch           1
+meme            1
+meme_raw        1
+total           6
+
+Select jobs to execute...
+
+[Thu Apr 23 20:06:51 2026]
+rule fetch:
+    input: config/input.txt
+    output: data/raw/sequences.fasta, data/raw/motifs.txt
+    jobid: 2
+    reason: Missing output files: data/raw/sequences.fasta, data/raw/motifs.txt
+    resources: tmpdir=/tmp
+
+[Thu Apr 23 20:06:54 2026]
+Finished job 2.
+1 of 6 steps (17%) done
+Select jobs to execute...
+
+[Thu Apr 23 20:06:54 2026]
+rule blast:
+    input: data/raw/sequences.fasta, data/raw/motifs.txt
+    output: results/blast/msa.tsv
+    jobid: 1
+    reason: Missing output files: results/blast/msa.tsv; Input files updated by another job: data/raw/sequences.fasta, data/raw/motifs.txt
+    resources: tmpdir=/tmp
+
+[Thu Apr 23 20:06:55 2026]
+Finished job 1.
+2 of 6 steps (33%) done
+Select jobs to execute...
+
+[Thu Apr 23 20:06:55 2026]
+rule meme_raw:
+    input: data/raw/sequences.fasta, data/raw/motifs.txt, results/blast/msa.tsv
+    output: results/meme/raw_meme.tsv
+    jobid: 4
+    reason: Missing output files: results/meme/raw_meme.tsv; Input files updated by another job: data/raw/sequences.fasta, data/raw/motifs.txt, results/blast/msa.tsv
+    resources: tmpdir=/tmp
+
+[Thu Apr 23 20:06:56 2026]
+Finished job 4.
+3 of 6 steps (50%) done
+Select jobs to execute...
+
+[Thu Apr 23 20:06:56 2026]
+rule meme:
+    input: results/meme/raw_meme.tsv
+    output: results/meme/meme_clean.tsv
+    jobid: 3
+    reason: Missing output files: results/meme/meme_clean.tsv; Input files updated by another job: results/meme/raw_meme.tsv
+    resources: tmpdir=/tmp
+
+[Thu Apr 23 20:06:56 2026]
+Finished job 3.
+4 of 6 steps (67%) done
+Select jobs to execute...
+
+[Thu Apr 23 20:06:56 2026]
+rule combine:
+    input: results/blast/msa.tsv, results/meme/meme_clean.tsv
+    output: results/final/simple_unique_hits.tsv, results/final/ranked_results.tsv
+    jobid: 5
+    reason: Missing output files: results/final/ranked_results.tsv, results/final/simple_unique_hits.tsv; Input files updated by another job: results/meme/meme_clean.tsv, results/blast/msa.tsv
+    resources: tmpdir=/tmp
+
+[Thu Apr 23 20:06:57 2026]
+Finished job 5.
+5 of 6 steps (83%) done
+Select jobs to execute...
+
+[Thu Apr 23 20:06:57 2026]
+localrule all:
+    input: results/blast/msa.tsv, results/meme/meme_clean.tsv, results/final/simple_unique_hits.tsv, results/final/ranked_results.tsv
+    jobid: 0
+    reason: Input files updated by another job: results/final/ranked_results.tsv, results/final/simple_unique_hits.tsv, results/meme/meme_clean.tsv, results/blast/msa.tsv
+    resources: tmpdir=/tmp
+
+[Thu Apr 23 20:06:57 2026]
+Finished job 0.
+6 of 6 steps (100%) done
+Complete log: .snakemake/log/2026-04-23T200651.310997.snakemake.log

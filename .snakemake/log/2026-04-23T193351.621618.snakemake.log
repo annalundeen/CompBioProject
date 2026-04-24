@@ -1,0 +1,5 @@
+Building DAG of jobs...
+MissingInputException in rule all in file /home/alundeen1/CompBioRedo/Snakefile, line 1:
+Missing input files for rule all:
+    affected files:
+        results/meme/meme_clean.tsvresults/final/simple_unique_hits.tsv

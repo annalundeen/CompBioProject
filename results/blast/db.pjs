@@ -1,0 +1,22 @@
+{
+  "version": "1.2",
+  "dbname": "db",
+  "dbtype": "Protein",
+  "db-version": 5,
+  "description": "results/blast/muscle.fasta",
+  "number-of-letters": 2218,
+  "number-of-sequences": 3,
+  "last-updated": "2026-04-24T13:07:00",
+  "number-of-volumes": 1,
+  "bytes-total": 39544,
+  "bytes-to-cache": 2350,
+  "files": [
+    "db.pdb",
+    "db.phr",
+    "db.pin",
+    "db.pot",
+    "db.psq",
+    "db.ptf",
+    "db.pto"
+  ]
+}

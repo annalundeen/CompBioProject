@@ -1,0 +1,6 @@
+Building DAG of jobs...
+MissingInputException in rule fetch in file /home/alundeen1/CompBioRedo/Snakefile, line 6:
+Missing input files for rule fetch:
+    output: data/raw/sequences.fasta
+    affected files:
+        config/input.txt

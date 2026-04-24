@@ -1,0 +1,6 @@
+Building DAG of jobs...
+MissingInputException in rule blast in file /home/alundeen1/CompBioRedo/Snakefile, line 14:
+Missing input files for rule blast:
+    output: results/blast/msa.tsv
+    affected files:
+        data/raw/motifs.txt

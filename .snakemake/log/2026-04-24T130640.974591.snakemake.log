@@ -1,0 +1,51 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job         count
+--------  -------
+all             1
+combine         1
+meme_raw        1
+total           3
+
+Select jobs to execute...
+
+[Fri Apr 24 13:06:41 2026]
+rule meme_raw:
+    input: data/raw/sequences.fasta, data/raw/motifs.txt, results/blast/msa.tsv
+    output: results/meme/meme_clean.tsv
+    jobid: 3
+    reason: Set of input files has changed since last execution; Code has changed since last execution
+    resources: tmpdir=/tmp
+
+[Fri Apr 24 13:06:42 2026]
+Finished job 3.
+1 of 3 steps (33%) done
+Select jobs to execute...
+
+[Fri Apr 24 13:06:42 2026]
+rule combine:
+    input: results/blast/msa.tsv, results/meme/meme_clean.tsv
+    output: results/final/simple_unique_hits.tsv, results/final/ranked_results.tsv
+    jobid: 4
+    reason: Input files updated by another job: results/meme/meme_clean.tsv
+    resources: tmpdir=/tmp
+
+[Fri Apr 24 13:06:43 2026]
+Finished job 4.
+2 of 3 steps (67%) done
+Select jobs to execute...
+
+[Fri Apr 24 13:06:43 2026]
+localrule all:
+    input: results/blast/msa.tsv, results/meme/meme_clean.tsv, results/final/simple_unique_hits.tsv, results/final/ranked_results.tsv
+    jobid: 0
+    reason: Input files updated by another job: results/final/simple_unique_hits.tsv, results/meme/meme_clean.tsv, results/final/ranked_results.tsv
+    resources: tmpdir=/tmp
+
+[Fri Apr 24 13:06:43 2026]
+Finished job 0.
+3 of 3 steps (100%) done
+Complete log: .snakemake/log/2026-04-24T130640.974591.snakemake.log

@@ -1,0 +1,47 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job      count
+-----  -------
+all          1
+blast        1
+fetch        1
+total        3
+
+Select jobs to execute...
+
+[Thu Apr 23 13:10:11 2026]
+rule fetch:
+    input: config/input.txt
+    output: data/raw/sequences.fasta, data/raw/motifs.txt
+    jobid: 2
+    reason: Missing output files: data/raw/motifs.txt, data/raw/sequences.fasta
+    resources: tmpdir=/tmp
+
+[Thu Apr 23 13:10:11 2026]
+Finished job 2.
+1 of 3 steps (33%) done
+Select jobs to execute...
+
+[Thu Apr 23 13:10:11 2026]
+rule blast:
+    input: data/raw/sequences.fasta, data/raw/motifs.txt
+    output: results/blast/msa.tsv
+    jobid: 1
+    reason: Missing output files: results/blast/msa.tsv; Input files updated by another job: data/raw/motifs.txt, data/raw/sequences.fasta
+    resources: tmpdir=/tmp
+
+[Thu Apr 23 13:10:12 2026]
+Error in rule blast:
+    jobid: 1
+    input: data/raw/sequences.fasta, data/raw/motifs.txt
+    output: results/blast/msa.tsv
+    shell:
+        python scripts/run_blast.py data/raw/sequences.fasta data/raw/motifs.txt results/blast
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2026-04-23T131010.547732.snakemake.log

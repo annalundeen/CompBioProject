@@ -1,0 +1,63 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job         count
+--------  -------
+all             1
+blast           1
+combine         1
+fetch           1
+meme            1
+meme_raw        1
+total           6
+
+Select jobs to execute...
+
+[Thu Apr 23 19:58:51 2026]
+rule fetch:
+    input: config/input.txt
+    output: data/raw/sequences.fasta, data/raw/motifs.txt
+    jobid: 2
+    reason: Missing output files: data/raw/sequences.fasta, data/raw/motifs.txt
+    resources: tmpdir=/tmp
+
+[Thu Apr 23 19:58:53 2026]
+Finished job 2.
+1 of 6 steps (17%) done
+Select jobs to execute...
+
+[Thu Apr 23 19:58:53 2026]
+rule blast:
+    input: data/raw/sequences.fasta, data/raw/motifs.txt
+    output: results/blast/msa.tsv
+    jobid: 1
+    reason: Missing output files: results/blast/msa.tsv; Input files updated by another job: data/raw/sequences.fasta, data/raw/motifs.txt
+    resources: tmpdir=/tmp
+
+[Thu Apr 23 19:58:54 2026]
+Finished job 1.
+2 of 6 steps (33%) done
+Select jobs to execute...
+
+[Thu Apr 23 19:58:54 2026]
+rule meme_raw:
+    input: data/raw/sequences.fasta, data/raw/motifs.txt, results/blast/msa.tsv
+    output: results/meme/raw_meme.tsv
+    jobid: 4
+    reason: Missing output files: results/meme/raw_meme.tsv; Input files updated by another job: results/blast/msa.tsv, data/raw/sequences.fasta, data/raw/motifs.txt
+    resources: tmpdir=/tmp
+
+[Thu Apr 23 19:58:55 2026]
+Error in rule meme_raw:
+    jobid: 4
+    input: data/raw/sequences.fasta, data/raw/motifs.txt, results/blast/msa.tsv
+    output: results/meme/raw_meme.tsv
+    shell:
+        python scripts/run_full_meme.py data/raw/sequences.fasta data/raw/motifs.txt results/blast/msa.tsv results/meme/raw_meme.tsv
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2026-04-23T195850.210193.snakemake.log

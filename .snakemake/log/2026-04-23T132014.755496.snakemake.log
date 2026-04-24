@@ -1,0 +1,24 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job      count
+-----  -------
+fetch        1
+total        1
+
+Select jobs to execute...
+
+[Thu Apr 23 13:20:15 2026]
+rule fetch:
+    input: config/input.txt
+    output: data/raw/sequences.fasta, data/raw/motifs.txt
+    jobid: 0
+    reason: Missing output files: data/raw/sequences.fasta
+    resources: tmpdir=/tmp
+
+[Thu Apr 23 13:20:16 2026]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: .snakemake/log/2026-04-23T132014.755496.snakemake.log
