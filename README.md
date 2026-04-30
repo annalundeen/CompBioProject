@@ -1,5 +1,5 @@
 ## Code Overview
-The entire analysis pipeline for this project is written in the combined_motif_analysis.py, which inputs a list of proteins and UniProt IDs to run BLAST, multiple sequence alignment, and MEME Suite FIMO to generate candidate motif matches. These candidate motifs are then used to generate PyMOL scripts to visualize each motif for putative interaction with the scorpion toxin LqhIII. 
+Our project uses a snakefile to run a combination of shell commands and python scripts to fetch protein sequences and then run BLAST, multiple sequence alignment, and the MEME Suite FIMO tool to generate candidate amino acid motif matches from an input list of UniProt IDs and motifs of interest. Using a log-based scoring system, we used identified motifs to generate PyMOL scripts and Chai-1 input sequences to investigate putative structural interaction with the scorpion toxin LqhIII. 
 
 ## Project Setup
 First, clone this repository into your environment using the following command in the terminal:
@@ -11,45 +11,37 @@ Then navigate into the project directory:
 cd CompBioProject/
 ```
 
-## Virtual Environment and Running Code
-This code requires a virtual environment so that packages can be installed in the project folder instead of globally. Documentation on setting up and managing environments in VS code can be found here: 
-https://code.visualstudio.com/docs/python/environments.
+## Conda Environment and Running Code
+This code requires a conda environment for package management. This assumes that your machine has miniconda or anaconda installed previously. Documentation for installing miniconda can be found here (it can be installed globally):
+https://www.anaconda.com/docs/getting-started/miniconda/main.
 
-First, make sure that you are in your project directory. Then, simply use the following command in the terminal, where your desired environment name can take the place of .venv: 
+Once miniconda is installed, navigate into your project directory. Then, simply use the following command in the terminal to create the conda environment: 
 ```
-python3 -m venv .venv
+conda env create --environment-spec environment.yml
 ```
-Once the virtual environment is set up in your project folder, make sure that it is activated using the command:
+Once the conda environment has been established in your project directory, activate it using the command:
 ```
-source .venv/bin/activate
+conda activate motif_pipeline
 ```
 When the virtual environment is active, the terminal prompt should show: 
 ```
-(.venv) user/path_to_project_directory
+(.motif_pipeline) user/path_to_project_directory
 ```
-Then, you will need to install the packages necessary to run the code within the virtual environment:
+To run the snakemake file, run the command:
 ```
-.venv/bin/python -m pip install numpy pandas requests biopython pymemesuite
+snakemake Snakefile --cores 1
 ```
-Once your virtual environment is set up, packages are installed, and you are in the correct directory, you can run the comprehensive python script: 
+To run everything again, run the clean rule:
 ```
-.venv/bin/python combined_motif_analysis.py
-```
-Note: for windows users, the commands to activate and run the code will look slightly different because there is no bin folder in the virual environment.
-```
-source .venv\Scripts\activate
-.venv\Scripts\python combined_motif_analysis.py
-```
-To deactivate the virtual environment, simply run:
-```
-deactivate
+snakemake clean --cores 1
 ```
 
-## Inputs and Expected Outputs
-The combined_motif_analysis.py reads in a data file called sample_data.txt. This file contains the proteins, Uniprot IDs, and the motifs of interest for this project. 
+## Input
+The inputs and outputs for each individual section of analysis are indicated in the the rules of the Snakefile. config/input.txt shows the input file to run the Snakefile, and it contains a list of proteins, UniProt IDs, and motifs of interest for this project.  
 
 ## Expected Outputs
 The Snakefile provided will output two final motif charts in the results folder under final. The first ranked_results.tsv is a table ranking our identified motifs based off P-values and motif sequence length. The second chart, simple_unique_hits.tsv provides a simplified format of the motifs for future analysis. 
 
 ## Structural Prediction and Alignmnet 
-To determine how well the identified motifs interact with the LqhIII toxin, we used protein modeling and predicting software. Protein modeling was done to compare structural similarity between the identified muscle protein motif and the input NAV1.5 or toxin motif. 
+To determine how well the identified motifs interact with the LqhIII toxin, we used protein modeling and predicting software. Our pipeline creates PyMOL scripts as well as Chai-1 input sequences for visualization. Protein modeling was done to compare structural similarity between the identified muscle protein motif and the input NAV1.5 or toxin motif. 
+https://colab.research.google.com/drive/1aFoc2KdYG9In8NDpSrkjNgxc08ujqWI1?usp=sharing
