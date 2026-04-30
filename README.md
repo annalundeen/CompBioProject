@@ -60,9 +60,9 @@ After opening the link to the Google Colab script, the first step is to connect 
 In the Chai script, there is a fasta-format section where the sequences for the LqhIII toxin and the candidate protein motifs can be inserted. To run the script, use the following input data: 
 
 LqhIII toxin: VRDGYIAQPENCVYHCFPGSSGCDTLCKEKGGTSGHCGFKVGHGLACWCNALPDNVGIIVEGEKCHS
-ABLIM1 motif: KVCGCDLAQGGFF
+ABLIM1 motif: CKGEVLRVQTKHFHIKCFTCKVCGCDLAQGGFFIKNGEYLCTLDYQRMYGTRC
 
-The motif can be substituted for other proteins and other motifs.
+The motif can be substituted for other proteins and other motifs. Each line in the file results/structure/Chai_Lab_Inputs.txt represents a unique muscle protein motif that can be plugged into the "peptide" section.
 
 Example shown below: 
 <img width="1178" height="492" alt="ToxinProteinExample" src="https://github.com/user-attachments/assets/6ce505ab-0d93-43bd-9a42-174be7f844d4" />
