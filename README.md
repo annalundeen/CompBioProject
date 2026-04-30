@@ -47,3 +47,9 @@ deactivate
 
 ## Inputs and Expected Outputs
 The combined_motif_analysis.py reads in a data file called sample_data.txt. This file contains the proteins, Uniprot IDs, and the motifs of interest for this project. 
+
+## Expected Outputs
+The Snakefile provided will output two final motif charts in the results folder under final. The first ranked_results.tsv is a table ranking our identified motifs based off P-values and motif sequence length. The second chart, simple_unique_hits.tsv provides a simplified format of the motifs for future analysis. 
+
+## Structural Prediction and Alignmnet 
+To determine how well the identified motifs interact with the LqhIII toxin, we used protein modeling and predicting software. Protein modeling was done to compare structural similarity between the identified muscle protein motif and the input NAV1.5 or toxin motif. 
