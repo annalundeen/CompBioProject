@@ -43,10 +43,10 @@ The initial input file to run the Snakefile is shown in config/input.txt, and it
 The Snakefile provided will output two final motif charts in the results folder under final. The first ranked_results.tsv is a table ranking our identified motifs based off P-values and motif sequence length. The second chart, simple_unique_hits.tsv provides a simplified format of the motifs for future analysis. 
 
 ## Structural Prediction and Alignment 
-To determine how well the identified motifs interact with the LqhIII toxin, we used protein modeling and predicting software. Our pipeline creates PyMOL scripts (results/structure/) as well as Chai-1 input sequences (results/structure/Chai_Lab_Inputs.txt) for visualization. An example run of Chai-1 can be shown here:
-https://colab.research.google.com/drive/1aFoc2KdYG9In8NDpSrkjNgxc08ujqWI1?usp=sharing.
+### Chai-1
+The PKH lab provided a Google Colab script to run Chai-1, a protein prediction and modeling software. The Chai script can be easily modified for other toxins and motifs. [Chai-1 Google Colab Script](https://colab.research.google.com/drive/1aFoc2KdYG9In8NDpSrkjNgxc08ujqWI1?usp=sharing) Our previously described pipeline outputs Chai-1 input sequences (results/structure/Chai_Lab_Inputs.txt) for visualization.
 
-This can be easily modified for other following comments on the colab script. Protein modeling was done to compare structural similarity between the identified muscle protein motif and the input NAV1.5, as well as to determine binding potential between the identified motifs and LqhIII toxin. 20 amino acids upstream and downstream of the motif in the respective protein were used for visualization purposes. Aggregate confidence scores in Chai-1 were not significantly changed by increasing or decreasing sequence length.
+Protein modeling was done to compare structural similarity between the identified muscle protein motif and the input NAV1.5, as well as to determine binding potential between the identified motifs and LqhIII toxin. 20 amino acids upstream and downstream of the motif in the respective protein were used for visualization purposes. Aggregate confidence scores in Chai-1 were not significantly changed by increasing or decreasing sequence length.
 
 After opening the google colab script, the first step is to connect to the specified run-time. In the upper right corner, click on the icon displaying "RAM Disk" and select "Connect to a hosted runtime: T4". Example shown below:
 <img width="2868" height="1094" alt="ChaiConnectRuntime" src="https://github.com/user-attachments/assets/8420ecb2-819e-4d6f-aeae-a92ea6789ffa" />
@@ -66,3 +66,5 @@ Then, run each cell by clicking the play buttons in each cell. If you encounter 
 After running code, the resulting structural prediction files (.cif format) can be downloaded from the "Files" tab, indicated by a folder icon on the left side of the google colab interface for the chai-1 script. Example shown below:
 <img width="2866" height="1346" alt="ChaiCIF" src="https://github.com/user-attachments/assets/ad3189b6-ea9c-4e66-8380-ab247eea077d" />
 
+### PyMOL
+Additionally, our pipeline creates PyMOL scripts (results/structure/).
