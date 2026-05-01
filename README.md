@@ -88,4 +88,6 @@ After successfully installing PyMOL, navigate to the original project directory 
 cd CompBioProject/
 conda activate motif_pipeline
 ```
-Then, download the .pdb files from data/pdb/ to your local machine. Navigate into the file pymol_file_generator.py and change the file paths to the paths to the newly downloaded .pdb files on your local machine. PyMOL requires local file paths to generate structures when PDB codes are not available. 
+Then, download the .pdb files from data/pdb/ to your local machine. Navigate into the file pymol_file_generator.py and change the file paths to the paths to the newly downloaded .pdb files on your local machine. PyMOL requires local file paths to generate structures when PDB codes are not available. Due to incomplete PDB sequence for ABLIM1 and MYBPC3, each of these files will need to be downloaded onto your local machine.
+
+Before running pymol_file_generator.py, two manual changes must be made to ensure you output accurate pymol scripts. Using the previously downloaded muscle .pdb files, copy your local directory under the respective muscle protein section within the script. 
