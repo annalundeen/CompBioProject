@@ -93,8 +93,17 @@ Then, download the .pdb files from data/pdb/ to your local machine. Navigate int
 
 Before running pymol_file_generator.py, two manual changes must be made to ensure you output accurate pymol scripts. Using the previously downloaded muscle .pdb files, copy your local directory under the respective muscle protein section within the script. The location and example path for both ABLIM1 and MYBPC3 are shown below.
 
-#### Example ABLIM1 Pathway and Location
+Example ABLIM1 Pathway and Location
 <img width="1022" height="474" alt="Screenshot 2026-04-30 at 7 37 50 PM" src="https://github.com/user-attachments/assets/9b000273-8a12-4d56-8a91-bc850f625884" />
 
-#### Example MYBPC3 Pathway and Location 
+Example MYBPC3 Pathway and Location 
 <img width="986" height="344" alt="Screenshot 2026-04-30 at 8 51 39 PM" src="https://github.com/user-attachments/assets/922ec760-856c-432e-8191-9839f4096f2e" />
+
+Once each of these changes have been made, run pymol_file_generator.py. You will get one .pml script for each identified muscle protein motif within simiple_unique_hits.tsv. Each file will be labeled with the muscle protein assocaited with the motif used to create the script. 
+
+# Running .pml Scripts in PyMOL
+To run the produced .pml scripts, download each script to your local machine and open the pyMOL application. Double click your chosen .pml script, this will open and run the script in pyMOL allowing you to view and interact with the chosen motif alignment.
+
+Example ABLIM1 .pml Output Image (ABLIM1 Motif:Pink, Sodium Channel:Teal)
+<img width="1280" height="960" alt="ABLIM1_output " src="https://github.com/user-attachments/assets/dfb8d84d-03ec-4ec1-90b2-11c476333bcd" />
+
