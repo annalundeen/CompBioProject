@@ -57,6 +57,12 @@ Protein modeling was done to compare structural similarity between the identifie
 After opening the link to the Google Colab script, the first step is to connect to the specified run-time. In the upper right corner, click on the icon displaying "RAM Disk" and select "Connect to a hosted runtime: T4". Example shown below:
 <img width="2872" height="1372" alt="ConnectToRunTime" src="https://github.com/user-attachments/assets/6d9d3549-8d4a-4a62-8f7c-133c889e6ca2" />
 
+When running the following code chunk:
+```
+!pip install chai-lab
+```
+An error message may pop up that requires the user to restart the runtime session. Follow this error message and run the code chunk again. It should finish running quickly without error the second time. 
+
 In the Chai script, there is a fasta-format section where the sequences for the LqhIII toxin and the candidate protein motifs can be inserted. To run the script, use the following input data: 
 
 LqhIII toxin: VRDGYIAQPENCVYHCFPGSSGCDTLCKEKGGTSGHCGFKVGHGLACWCNALPDNVGIIVEGEKCHS
