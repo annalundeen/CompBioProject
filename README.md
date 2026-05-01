@@ -74,11 +74,12 @@ After running code, the resulting structural prediction files (.cif format) can 
 <img width="2876" height="1378" alt="CIF_Files" src="https://github.com/user-attachments/assets/db5110fe-2bbf-4b74-a12d-f7ea0dc5af41" />
 
 ### PyMOL
-As an additional tool for structural visualization, the script pymol_file_generator.py is present in scripts/. If you wish to use this additional functionality for visualization, the first step is to install PyMOL locally on your device. Please refer to the PyMOL documentation for installation: https://github.com/schrodinger/pymol-open-source
+As an additional tool for structural visualization, the script pymol_file_generator.py is present in scripts/. If you wish to use this additional functionality for visualization, the first step is to install PyMOL locally on your device. Please refer to the PyMOL documentation for installation: https://github.com/schrodinger/pymol-open-source 
+Note that you do not need to purchase a license to download pymol, the functions available within the free version is enough for the provided files. 
 
 After successfully installing PyMOL, navigate to the original project directory and activate the Conda environment.
 ```
 cd CompBioProject/
 conda activate motif_pipeline
 ```
-Then, download the .pdb files from data/pdb/ to your local machine. Navigate into the file pymol_file_generator.py and change the file paths to the paths to the newly downloaded .pdb files on your local machine. PyMOL requires local file paths. 
+Then, download the .pdb files from data/pdb/ to your local machine. Navigate into the file pymol_file_generator.py and change the file paths to the paths to the newly downloaded .pdb files on your local machine. PyMOL requires local file paths to generate structures when PDB codes are not available. 
