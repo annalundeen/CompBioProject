@@ -82,8 +82,9 @@ Then, run each cell by clicking the play buttons in each cell. If you encounter 
 After running code, the resulting structural prediction files (.cif format) can be downloaded from the "Files" tab, indicated by a folder icon on the left side of the google colab interface for the chai-1 script. Example shown below:
 <img width="2876" height="1378" alt="CIF_Files" src="https://github.com/user-attachments/assets/db5110fe-2bbf-4b74-a12d-f7ea0dc5af41" />
 
+
 ### PyMOL
-As an additional tool for structural visualization, the script pymol_file_generator.py is present in scripts/. If you wish to use this additional functionality for visualization, the first step is to install PyMOL locally on your device. Please refer to the PyMOL documentation for installation: https://github.com/schrodinger/pymol-open-source 
+As an additional tool for structural visualization, the script pymol_file_generator.py is present in scripts/. This script will output .pml files to visualize the alignment between the identified muscle motifs and the provided Sodium Channel motifs. If you wish to use this additional functionality for visualization, the first step is to install PyMOL locally on your device. Please refer to the PyMOL documentation for installation: https://github.com/schrodinger/pymol-open-source 
 Note that you do not need to purchase a license to download pymol, the functions available within the free version is enough for the provided files. 
 
 After successfully installing PyMOL, navigate to the original project directory and activate the Conda environment.
