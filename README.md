@@ -1,3 +1,5 @@
+# COMP483 Project: Computational Design of Selective, Scorpion Toxin-based Inhibitors for Disordered Proteins
+
 ## Code Overview
 Our project uses a snakefile to run a combination of shell commands and python scripts to fetch protein sequences and then run BLAST, multiple sequence alignment, and the MEME Suite FIMO tool to generate candidate amino acid motif matches from an input list of UniProt IDs and motifs of interest. Using a log-based scoring system, we used identified motifs to generate PyMOL scripts and Chai-1 input sequences to investigate putative structural interaction with the scorpion toxin LqhIII. 
 
